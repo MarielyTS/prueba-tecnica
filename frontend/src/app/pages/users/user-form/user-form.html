@@ -1,0 +1,82 @@
+<div class="card">
+  <h1>{{ isEdit ? 'Editar usuario' : 'Nuevo usuario' }}</h1>
+
+  @if (errorMessage()) {
+    <div class="alert-error">{{ errorMessage() }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Usuario</label>
+      <input
+        id="username"
+        type="text"
+        formControlName="username"
+        [class.invalid]="form.controls.username.touched && form.controls.username.invalid"
+      />
+      @if (hasError('username', 'required')) {
+        <div class="field-error">El usuario es obligatorio.</div>
+      }
+      @if (hasError('username', 'minlength')) {
+        <div class="field-error">Debe tener al menos 3 caracteres.</div>
+      }
+      @if (hasError('username', 'maxlength')) {
+        <div class="field-error">No puede superar 50 caracteres.</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        [class.invalid]="form.controls.email.touched && form.controls.email.invalid"
+      />
+      @if (hasError('email', 'required')) {
+        <div class="field-error">El email es obligatorio.</div>
+      }
+      @if (hasError('email', 'email')) {
+        <div class="field-error">El email no tiene un formato válido.</div>
+      }
+      @if (hasError('email', 'maxlength')) {
+        <div class="field-error">No puede superar 100 caracteres.</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="password">
+        Contraseña
+        @if (isEdit) {
+          <small>(dejar vacío para no cambiarla)</small>
+        }
+      </label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        [class.invalid]="form.controls.password.touched && form.controls.password.invalid"
+      />
+      @if (hasError('password', 'required')) {
+        <div class="field-error">La contraseña es obligatoria.</div>
+      }
+      @if (hasError('password', 'minlength')) {
+        <div class="field-error">Debe tener al menos 6 caracteres.</div>
+      }
+    </div>
+
+    @if (isEdit) {
+      <div class="form-group">
+        <label>
+          <input type="checkbox" formControlName="estado" />
+          Usuario activo
+        </label>
+      </div>
+    }
+
+    <button type="submit" class="btn btn-primary" [disabled]="saving()">
+      {{ saving() ? 'Guardando...' : 'Guardar' }}
+    </button>
+    <a routerLink="/users" class="btn btn-secondary" style="margin-left: 8px">Cancelar</a>
+  </form>
+</div>

@@ -1,0 +1,33 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores e IDEs
+.vs/
+.idea/
+*.suo
+*.user
+*.userprefs
+*.swp
+
+# Variables de entorno / secretos
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# Backend (.NET)
+**/bin/
+**/obj/
+**/TestResults/
+*.nupkg
+
+# Frontend (Node / Angular)
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/

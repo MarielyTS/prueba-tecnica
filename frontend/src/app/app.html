@@ -1,0 +1,13 @@
+@if (authService.currentUser(); as user) {
+  <header class="header">
+    <span class="brand">Gestión de usuarios</span>
+    <div class="header-right">
+      <span>Hola, <strong>{{ user.username }}</strong></span>
+      <button class="btn btn-secondary" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </header>
+}
+
+<main class="container">
+  <router-outlet />
+</main>

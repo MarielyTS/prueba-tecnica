@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:16
+    container_name: prueba-tecnica-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: prueba_tecnica
+    ports:
+      - "5432:5432"
+    volumes:
+      # Los .sql de esta carpeta se ejecutan solo la primera vez (con el volumen vacío)
+      - ./database/script.sql:/docker-entrypoint-initdb.d/script.sql:ro
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d prueba_tecnica"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db-data:

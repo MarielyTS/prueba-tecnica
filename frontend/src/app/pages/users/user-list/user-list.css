@@ -1,0 +1,20 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+}
